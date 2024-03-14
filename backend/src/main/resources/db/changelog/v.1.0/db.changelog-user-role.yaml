@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-role-table
+      comment: "Create user roles table for many to many"
+      author: n7meless
+      changes:
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    notNullConstraintName: fk_user_id
+                    referencedTableName: users
+                    referencedColumnNames: id
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_role_id
+                    notNullConstraintName: fk_role_id
+                    referencedTableName: roles
+                    referencedColumnNames: id
+  - changeSet:
+      id: insert-users-roles-into-table
+      comment: "insert users and roles into table"
+      author: n7meless
+      changes:
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 1
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 2
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: role_id
+                  value: 2

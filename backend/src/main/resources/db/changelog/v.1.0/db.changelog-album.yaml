@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-albums-table
+      comment: "Create album table"
+      author: n7meless
+      changes:
+        - createTable:
+            tableName: albums
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: created_dt
+                  type: date
+                  defaultValue: now()
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    referencedTableName: users
+                    referencedColumnNames: id
+                    foreignKeyName: fk_user_id
+                    nullable: false

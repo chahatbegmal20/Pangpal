@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-post-table
+      comment: "Create post table"
+      author: n7meless
+      changes:
+        - createTable:
+            tableName: posts
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: text
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_dt
+                  type: date
+                  constraints:
+                    nullable: false
+                  defaultValue: now()
+                  defaultOnNull: true
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_id
+                    referencedTableName: users
+                    referencedColumnNames: id
+              - column:
+                  name: album_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_album_id
+                    referencedTableName: albums
+                    referencedColumnNames: id

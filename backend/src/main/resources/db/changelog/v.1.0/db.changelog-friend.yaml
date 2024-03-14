@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-friend-table
+      comment: "Create friend table"
+      author: n7meless
+      changes:
+        - createTable:
+            tableName: friends
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_dt
+                  type: Date
+              - column:
+                  name: first_user
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_first_user
+                    referencedTableName: users
+                    referencedColumnNames: id
+              - column:
+                  name: second_user
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_second_user
+                    referencedTableName: users
+                    referencedColumnNames: id
+              - column:
+                  name: initiatorId
+                  type: BIGINT
+              - column:
+                  name: status
+                  type: varchar(20)

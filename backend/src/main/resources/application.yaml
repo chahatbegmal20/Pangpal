@@ -1,0 +1,63 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sc_network
+    username: ${PG_USER}
+    password: ${PG_PASS}
+    driver-class-name: org.postgresql.Driver
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 5MB
+      max-request-size: 10MB
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+#    open-in-view: true
+  security:
+    user:
+      name: admin
+      password: $2a$12$gaOmpwWi/0L6OZnR9wnQlOZVqhwH94xFiQ9t9.4/ya5L1vRPxwEaK
+      roles: ADMIN
+  mail:
+    host: smtp.yandex.ru
+    port: 465
+    protocol: smtps
+    username: ${MAIL_NAME}
+    password: ${MAIL_PASS}
+  liquibase:
+    change-log: "classpath:/db/changelog/db.changelog-master.yaml"
+  profiles:
+    active: development
+server:
+  port: 4000
+  error:
+    include-message: always
+application:
+  security:
+    access-token-secret: very_long_and_secure_and_safe_access_key
+    refresh-token-secret: very_long_and_secure_and_safe_refresh_key
+    access-token-validity: 20
+    refresh-token-validity: 10080
+    allowed-origins: http://localhost:4000, http://localhost:3000, http://localhost:8000
+  frontend:
+    default-url: http://localhost:8000
+  bucket:
+    name:
+      scnet-image-storage
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS}
+      secret-key: ${AWS_SECRET}
+    stack:
+      auto: false
+    region:
+      static: us-east-1

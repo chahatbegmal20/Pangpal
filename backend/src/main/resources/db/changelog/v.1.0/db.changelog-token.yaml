@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-token-table
+      comment: "Create token table"
+      author: n7meless
+      changes:
+        - createTable:
+            tableName: tokens
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: refresh_token
+                  type: varchar(255)
+              - column:
+                  name: issue_at
+                  type: Date
+                  defaultValueComputed: now()
+              - column:
+                  name: expired_at
+                  type: Date
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    referencedColumnNames: id
+                    referencedTableName: users
+                    foreignKeyName: fk_user_id
+                    nullable: false

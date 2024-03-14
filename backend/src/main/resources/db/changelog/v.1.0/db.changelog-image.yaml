@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-images-table
+      comment: "Create images table"
+      author: n7meless
+      changes:
+        - createTable:
+            tableName: images
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_dt
+                  type: date
+                  defaultValue: now()
+                  defaultOnNull: true
+              - column:
+                  name: file_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: path
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: content_type
+                  type: varchar(100)
+              - column:
+                  name: image_type
+                  type: varchar(20)
+              - column:
+                  name: album_id
+                  type: BIGINT
+                  constraints:
+                    referencedColumnNames: id
+                    referencedTableName: albums
+                    foreignKeyName: fk_album_id
+                    nullable: false

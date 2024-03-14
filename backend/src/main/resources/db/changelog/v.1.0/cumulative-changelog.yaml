@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/v.1.0/db.changelog-user.yaml
+  - include:
+      file: db/changelog/v.1.0/db.changelog-roles.yaml
+  - include:
+      file: db/changelog/v.1.0/db.changelog-user-role.yaml
+  - include:
+      file: db/changelog/v.1.0/db.changelog-friend.yaml
+  - include:
+      file: db/changelog/v.1.0/db.changelog-token.yaml
+  - include:
+      file: db/changelog/v.1.0/db.changelog-password-recovery.yaml
+  - include:
+      file: db/changelog/v.1.0/db.changelog-album.yaml
+  - include:
+      file: db/changelog/v.1.0/db.changelog-post.yaml
+  - include:
+      file: db/changelog/v.1.0/db.changelog-image.yaml

@@ -1,0 +1,83 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-table
+      comment: "Create user table"
+      author: n7meless
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(512)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(50)
+              - column:
+                  name: last_name
+                  type: varchar(50)
+              - column:
+                  name: created_dt
+                  type: date
+                  defaultValue: now()
+              - column:
+                  name: status
+                  type: varchar(20)
+                  defaultValue: ACTIVE
+  - changeSet:
+      id: insert-users-into-table
+      author: n7meless
+      comment: "Create users"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "admin@gmail.com"
+              - column:
+                  name: password
+                  value: "$2a$12$ITQY0eQX9RIaIgGODRxwH.aWsUZ/6lznbcqYdExkCRsedDsGxjdGu"
+              - column:
+                  name: first_name
+                  value: "admin"
+              - column:
+                  name: last_name
+                  value: "admin"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "user"
+              - column:
+                  name: password
+                  value: "$2a$12$ShPrBDcM48OJsXLBqW7dh.hFwq5ki8/sC4eDpC.S4xhChQs/E0XbS"
+              - column:
+                  name: email
+                  value: "user@gmail.com"
+              - column:
+                  name: first_name
+                  value: "user"
+              - column:
+                  name: last_name
+                  value: "user"
+      rollback:
+        - delete:
+            tableName: users
+            where: email in ('admin@gmail.com', 'user@gmail.com')
